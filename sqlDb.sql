@@ -1,6 +1,9 @@
+DROP DATABASE ForoAA;
 CREATE DATABASE IF NOT EXISTS ForoAA;
 USE ForoAA;
-
+drop table if exists messages;
+DROP TABLE IF EXISTS posts;
+DROP TABLE IF EXISTS topics;
 DROP TABLE IF EXISTS users;
 CREATE TABLE users
 (
@@ -11,7 +14,6 @@ CREATE TABLE users
     PRIMARY KEY (userId)
 );
 
-DROP TABLE IF EXISTS topics;
 CREATE TABLE topics
 (
     topicId INT         NOT NULL AUTO_INCREMENT,
@@ -19,15 +21,13 @@ CREATE TABLE topics
     PRIMARY KEY (topicId)
 );
 
-DROP TABLE IF EXISTS posts;
 CREATE TABLE posts
 (
-    postId         INT          NOT NULL AUTO_INCREMENT,
-    title          varchar(32),
-    message        varchar(300) not null,
-    topicId        INT          NOT NULL,
-    previousPostId int default null,
-    userId         int          NOT NULL,
+    postId  INT          NOT NULL AUTO_INCREMENT,
+    title   varchar(32)  not null,
+    message varchar(300) not null,
+    topicId INT          NOT NULL,
+    userId  int          NOT NULL,
     PRIMARY KEY (postId),
     CONSTRAINT FK_topicId
         FOREIGN KEY (topicId)
@@ -38,12 +38,32 @@ CREATE TABLE posts
         FOREIGN KEY (userId)
             REFERENCES users (userId)
             ON DELETE cascade
+            ON UPDATE cascade
+);
+
+create table messages
+(
+    messageId         int          not null auto_increment,
+    message           varchar(300) not null,
+    userId            int          not null,
+    postId            int          not null,
+    previousMessageId int,
+    primary key (messageId),
+    constraint FK_postIdMess
+        foreign key (postId)
+            references posts (postId)
+            ON DELETE cascade
             ON UPDATE cascade,
-    CONSTRAINT FK_prevpostId
-        FOREIGN KEY (previousPostId)
-            REFERENCES posts (postId)
-            ON DELETE set null
-            ON UPDATE set null
+    CONSTRAINT FK_userIdMess
+        FOREIGN KEY (userId)
+            REFERENCES users (userId)
+            ON DELETE cascade
+            ON UPDATE cascade,
+    constraint FK_previousMessageId
+        foreign key (previousMessageId)
+            references messages (messageId)
+            on delete cascade
+            on update cascade
 );
 
 
@@ -65,17 +85,20 @@ insert into topics
 values (4, 'aves');
 
 
-insert into posts (postId, title, message, topicId, previousPostId, userId)
+insert into posts (postId, title, message, topicId, userId)
 values (1, 'que le pasa a mi pez?', 'sali de casa con la sonrisa puesta, hoy me he levantado contento de verdad', 3,
-        null, 1);
-insert into posts (postId, title, message, topicId, previousPostId, userId)
-values (2, null, 'El sol de la mañana brilla en mi cara', 3, 1, 3);
-insert into posts (postId, title, message, topicId, previousPostId, userId)
-values (3, null, 'una brisa fresca me ayuda a despertar', 3,
-        2, 1);
-insert into posts (postId, title, message, topicId, previousPostId, userId)
-values (4, 'Prueba', 'Test by test', 1, null, 2);
-insert into posts (postId, title, message, topicId, previousPostId, userId)
-values (5, 'Fotos de mi gato', 'https://www.reddit.com/r/catpictures/', 2, null, 3);
-insert into posts (postId, title, message, topicId, previousPostId, userId)
-values (6, null, 'WoW!', 2, 5, 1);
+        1);
+insert into posts (postId, title, message, topicId, userId)
+values (2, 'Prueba', 'Test by test', 1, 2);
+insert into posts (postId, title, message, topicId, userId)
+values (3, 'Fotos de mi gato', 'https://www.reddit.com/r/catpictures/', 2, 3);
+
+
+insert into messages (messageId, message, userId, postId, previousMessageId)
+VALUES (1, 'El Sol de la mañana brilla en mi cara', 3, 1, null);
+
+insert into messages (messageId, message, userId, postId, previousMessageId)
+VALUES (2, 'una brisa fresca me ayuda a despertar', 1, 1, 1);
+
+insert into messages (messageId, message, userId, postId, previousMessageId)
+VALUES (3, 'Wow!', 1, 3, null)

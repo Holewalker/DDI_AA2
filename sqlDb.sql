@@ -1,4 +1,4 @@
-DROP DATABASE ForoAA;
+DROP DATABASE if exists ForoAA;
 CREATE DATABASE IF NOT EXISTS ForoAA;
 USE ForoAA;
 drop table if exists messages;

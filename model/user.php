@@ -58,8 +58,8 @@ class user
         global $conexion;
         if (!$conexion)
             die();
-        $query = "SELECT * FROM users where username = '.$username' and pass = md5('.$pass')";
-        return $res = mysqli_query($conexion, $query);
+        $query = "SELECT username FROM users where username = '.$username' and pass = md5('.$pass')";
+        return mysqli_query($conexion, $query);
     }
 
 }

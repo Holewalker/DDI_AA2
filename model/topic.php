@@ -5,7 +5,7 @@ class topic
 {
     public int $topicId;
     public string $name;
-    public $db;
+    public PDO $db;
 
     /**
      * @param int $topicId
@@ -105,7 +105,7 @@ class topic
         return false;
     }
 
-    function updateTopicById($topicId)
+    function updateTopicById()
     {
         try {
             $result = $this->db->prepare('UPDATE topics SET name=:name WHERE topicId=:topicId');

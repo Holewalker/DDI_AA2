@@ -7,19 +7,20 @@ class user
     public $username;
     public $email;
     public $pass;
+    public PDO $db;
 
     /**
      * @param $userId
      * @param $username
      * @param $email
-     * @param $pass
      */
-    public function __construct($userId, $username, $email, $pass)
+    public function __construct($userId, $username, $email)
     {
         $this->userId = $userId;
         $this->username = $username;
         $this->email = $email;
-        $this->pass = $pass;
+
+        $this->db = DBConexion::connection();
     }
 
     public function getUserId()
@@ -77,8 +78,5 @@ class user
         } else {
             return $usuario = null;
         }
-        $respuesta->closeCursor();
-        $conexion = null;
     }
-
 }

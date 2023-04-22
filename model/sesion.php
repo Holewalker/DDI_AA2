@@ -1,5 +1,5 @@
 <?php
-	class Sesion {
+	class Session {
 		//Iniciamos la sesión
 		function __construct() {
 			session_start();

@@ -8,6 +8,7 @@ public String $message;
 public int $userId;
 public int $postId;
 public int $previousMessageId;
+    public PDO $db;
 
     /**
      * @param int $messageId
@@ -23,6 +24,8 @@ public int $previousMessageId;
         $this->userId = $userId;
         $this->postId = $postId;
         $this->previousMessageId = $previousMessageId;
+        $this->db = DBConexion::connection();
+
     }
 
     /**

@@ -1,5 +1,5 @@
 <?php
-require_once("conexion/conexionheader.php");
+require_once("ddbb/conexionheader.php");
 
 class user
 {
@@ -8,8 +8,18 @@ class user
     public $email;
     public $pass;
 
-    public function __construct()
+    /**
+     * @param $userId
+     * @param $username
+     * @param $email
+     * @param $pass
+     */
+    public function __construct($userId, $username, $email, $pass)
     {
+        $this->userId = $userId;
+        $this->username = $username;
+        $this->email = $email;
+        $this->pass = $pass;
     }
 
     public function getUserId()
@@ -43,23 +53,32 @@ class user
         $this->email = $email;
     }
 
-    public function getPass()
+
+    public static function crypMd5($password)
     {
-        return $this->pass;
+        //Crea un salt
+        $password = md5($password);
+        return $password;
     }
 
-    public function setPass($pass)
-    {
-        $this->pass = $pass;
-    }
-
+    /*
+    * @param String $pass;
+     */
     public function checkCredentials($username, $pass)
     {
-        global $conexion;
-        if (!$conexion)
-            die();
-        $query = "SELECT * FROM users where username = '.$username' and pass = md5('.$pass')";
-        return $res = mysqli_query($conexion, $query);
+        $pass = self::crypMd5($pass);
+        $db = DBConexion::connection();
+        $sql = $db->query("SELECT * FROM users where username = '.$username' and pass = '.$pass'");
+        $respuesta = $db->prepare($sql);
+        $respuesta = $respuesta->fetch();
+        if ($respuesta) {
+            $usuario = new user($respuesta["userId"], $respuesta["username"], $respuesta["email"]);
+            return $usuario;
+        } else {
+            return $usuario = null;
+        }
+        $respuesta->closeCursor();
+        $conexion = null;
     }
 
 }

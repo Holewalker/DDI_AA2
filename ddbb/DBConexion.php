@@ -13,7 +13,7 @@ class DBConexion
             // $connection = new mysqli('localhost', 'root', 'root', 'dwes');
             //  $connection = new mysqli(host, user, pass, dbname, 3306);
             // Call the instance and do a query to set default enconding
-            $dsn = 'mysql:host=' & host & ';dbname=' & dbname;
+            $dsn = 'mysql:host=' . host . ';dbname=' . dbname;
             $db = new PDO($dsn, user, pass);
             $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 

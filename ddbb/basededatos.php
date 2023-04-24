@@ -1,6 +1,6 @@
 <?php
-    define("host",'localhost');
-    define('user','root');
-    define('pass', '');
-    define('dbname', 'ForoAA');
+const host = 'localhost';
+const user = 'root';
+const pass = '';
+const dbname = 'ForoAA';
 

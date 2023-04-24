@@ -1,7 +1,7 @@
 <?php
 require_once("ddbb/DBConexion.php");
 
-class topic
+class Topic
 {
     public int $topicId;
     public string $name;
@@ -75,7 +75,7 @@ class topic
         return false;
     }
 
-    function createTopic()
+    function createTopic($name)
     {
         try {
             $query = "INSERT INTO topics (name) VALUES (:name)";

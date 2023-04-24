@@ -19,6 +19,7 @@ session_start();
         <a href="/views/topicListIndex.php" class="btn btn-info m-1" type="button">Register</a>
     </div>
     <a href="/views/topicListIndex.php" class="btn btn-info m-1" type="button">New topic!</a>
+    <a href="/views/loginForm.php" class="btn btn-info m-1" type="button">Login</a>
 </nav>
 <div class="container-sm text-center justify-content-center w-25 mt-5">
     <?php foreach ($topics

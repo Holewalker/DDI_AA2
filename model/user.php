@@ -19,7 +19,6 @@ class user
         $this->userId = $userId;
         $this->username = $username;
         $this->email = $email;
-
         $this->db = DBConexion::connection();
     }
 
@@ -32,7 +31,6 @@ class user
     {
         $this->userId = $userId;
     }
-
 
     public function getUsername()
     {
@@ -54,10 +52,8 @@ class user
         $this->email = $email;
     }
 
-
     public static function crypMd5($password)
     {
-        //Crea un salt
         $password = md5($password);
         return $password;
     }
@@ -79,4 +75,23 @@ class user
             return $usuario = null;
         }
     }
+
+    public function createUser()
+    {
+        try {
+            $saltedPass = self::crypMd5($_POST['pass']);
+            $query = "INSERT INTO users (username, email, pass) VALUES (:username,:email, :pass)";
+            $stmt = $this->db->prepare($query);
+            $stmt->bindParam(':username', $_POST['username']);
+            $stmt->bindParam(':email', $_POST['email']);
+            $stmt->bindParam(':pass', $saltedPass);
+            $stmt->execute();
+            return $this->db->lastInsertId();
+        } catch (PDOException $e) {
+            echo "ERROR: " . $e->getMessage();
+        }
+        return false;
+    }
+
+
 }

@@ -1,6 +1,6 @@
 <?php
-require_once 'model/user.php';
-require_once 'model/sesion.php';
+require_once '../model/user.php';
+require_once '../model/sesion.php';
 
 
 class User_Controller
@@ -10,7 +10,7 @@ class User_Controller
 
     public function __construct()
     {
-        $this->modelUser = new User(0, '');
+        $this->modelUser = new User(0, '','');
         $this->session = new Session();
     }
 
@@ -25,17 +25,15 @@ class User_Controller
         }
     }
 
-    public function checkUser()
+    public function checkUser($username, $pass)
     {
 
         include("view/header.php");
-        if ($_SERVER["REQUEST_METHOD"] == "POST") {
-            $username = $_POST["username"];
-            $pass = $_POST["pass"];
+
             $this->modelUser->checkCredentials($username, $pass);
             $this->session->set($this->modelUser['username'], $this->modelUser['username']);
             header("Location: /AA2/index.php");
-        }
+
     }
 
 

@@ -1,11 +1,10 @@
 <?php
-include("header.php");
+include ("header.php");
 ?>
-
 
 <body>
 <h2>Login</h2>
-<form action="loginForm.php" method="POST">
+<form action="user_controller.php?action=login" method="post">
     <label for="username">Username:</label>
     <input type="text" name="username" required><br>
     <label for="password">Password:</label>
@@ -14,5 +13,7 @@ include("header.php");
 </form>
 
 <p>¿Aún no estás registrado? <a href="view/register.php">Registrar</a>.</p>
+
+
 
 

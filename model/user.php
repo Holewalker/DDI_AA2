@@ -65,14 +65,15 @@ class user
     {
         $pass = self::crypMd5($pass);
         $db = DBConexion::connection();
-        $sql = $db->query("SELECT * FROM users where username = '.$username' and pass = '.$pass'");
-        $respuesta = $db->prepare($sql);
+        //$sql = $db->query("SELECT * FROM users where username = '.$username' and pass = '.$pass'");
+        //$respuesta = $db->prepare($sql);
+        $respuesta = $db->prepare("SELECT * FROM users where username = '.$username' and pass = '.$pass'");
         $respuesta = $respuesta->fetch();
         if ($respuesta) {
             $usuario = new user($respuesta["userId"], $respuesta["username"], $respuesta["email"]);
-            return $usuario;
+            return $usuario->getUsername();
         } else {
-            return $usuario = null;
+            return null;
         }
     }
 

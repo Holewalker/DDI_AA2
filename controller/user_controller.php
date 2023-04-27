@@ -30,8 +30,8 @@ class User_Controller
 
         include("../views/header.php");
 
-        $this->modelUser->checkCredentials($username, $pass);
-        $this->session->set($this->modelUser['username'], $this->modelUser['username']);
+        $this->session->set("username", $this->modelUser->checkCredentials($username, $pass));
+
         header("Location: /AA2/index.php");
 
     }
@@ -45,12 +45,14 @@ class User_Controller
 
 
 }
+
 //end class
+$campo = null;
+$validacion = true;
 $controlador = new User_Controller();
-if(isset($_GET["endSession"])){
+if (isset($_GET["endSession"])) {
     $controlador->endSession();
 }
-
 
 
 require_once("userForms/user_login.php");

@@ -12,9 +12,9 @@ if(isset($_GET["register"])){
 <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="POST">
     <?php require_once("../controller/user_controller.php"); ?>
     <label for="username">Username:</label>
-    <input type="text" name="username" required><br>
+    <input type="text" name="username" id="username" required <?php echo (isset($alias) ? 'value="'.$alias.'"' : ''); echo (($campo == 'username' || $campo == null) ? 'autofocus':''); ?>><br>
     <label for="password">Password:</label>
-    <input type="password" name="password" required><br>
+    <input type="password" name="password" id="password" required><br>
     <input type="submit" name="login" value="Iniciar sesión">
 </form>
 

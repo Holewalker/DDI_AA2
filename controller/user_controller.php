@@ -10,7 +10,7 @@ class User_Controller
 
     public function __construct()
     {
-        $this->modelUser = new User(0, '','');
+        $this->modelUser = new User(0, '', '');
         $this->session = new Session();
     }
 
@@ -28,11 +28,11 @@ class User_Controller
     public function checkUser($username, $pass)
     {
 
-        include("view/header.php");
+        include("../views/header.php");
 
-            $this->modelUser->checkCredentials($username, $pass);
-            $this->session->set($this->modelUser['username'], $this->modelUser['username']);
-            header("Location: /AA2/index.php");
+        $this->modelUser->checkCredentials($username, $pass);
+        $this->session->set($this->modelUser['username'], $this->modelUser['username']);
+        header("Location: /AA2/index.php");
 
     }
 
@@ -45,3 +45,12 @@ class User_Controller
 
 
 }
+//end class
+$controlador = new User_Controller();
+if(isset($_GET["endSession"])){
+    $controlador->endSession();
+}
+
+
+
+require_once("userForms/user_login.php");

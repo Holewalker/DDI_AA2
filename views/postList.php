@@ -1,20 +1,20 @@
 <?php
 include("header.php");
+require_once '../controller/post_controller.php';
 ?>
 
+<?php foreach ($posts
 
-
-<?php foreach ($topics
-
-               as $topic): ?>
+               as $post): ?>
 
     <div class="row justify-content-center mb-1">
         <div class="col">
-            <?php echo $topic['name'] ?></td>
+            <?php echo $post['title'] ?></td>
         </div>
         <div class="col">
-            <a href="/views/postList.php?topicId=<?php echo $topic['topicId'] ?>" class="btn btn-info" type="button">See
-                posts</a></div>
+            <a href="/views/postList.php?topicId=<?php echo $post['topicId'] ?>" class="btn btn-info" type="button">See
+                posts</a>
+        </div>
         <div class="col">
             <a href="/views/topicListIndex.php"
                 <?php if (isset($_SESSION['admin'])) {

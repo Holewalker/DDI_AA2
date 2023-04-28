@@ -1,7 +1,7 @@
 <?php
 require_once('../ddbb/DBConexion.php');
-require_once('topic.php');
 require_once('user.php');
+
 class post
 {
     public int $postId;
@@ -108,7 +108,7 @@ class post
         $this->db = DBConexion::connection();
     }
 
-    function getPostList()
+    public function getPostList()
     {
         try {
             $res = $this->db->query('SELECT * FROM posts');
@@ -120,7 +120,23 @@ class post
         return false;
     }
 
-    function getPostById($postId)
+    public static function getPostsByTopicId($topicId)
+    {
+        try {
+
+            $db = DBConexion::connection();
+            $sql = "SELECT * FROM posts WHERE topicId=?";
+            $respuesta = $db->prepare($sql);
+            $respuesta->execute(array($topicId));
+            $respuesta = $respuesta->fetchAll(PDO::FETCH_ASSOC);
+            return $respuesta;
+        } catch (PDOException $e) {
+            echo "ERROR: " . $e->getMessage();
+        }
+    }
+
+
+    public function getPostById($postId)
     {
         try {
 

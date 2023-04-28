@@ -17,9 +17,7 @@ session_start();
 
 <nav class="navbar navbar-light bg-light">
     <div class="container justify-content-center">
-        <a href="/AA2/index.php" class="btn btn-info m-1" type="button">Topics</a>
-        <a href="/AA2/views/topicListIndex.php" class="btn btn-info m-1" type="button">WIP</a>
-        <a href="/AA2/views/topicListIndex.php" class="btn btn-info m-1" type="button">WIP</a>
+        <a href="/AA2/index.php" class="btn btn-info m-1" type="button">Main page</a>
     </div>
     <a href="./views/topicListIndex.php" class="btn btn-info m-1" type="button">New topic! (WIP)</a>
     <?php

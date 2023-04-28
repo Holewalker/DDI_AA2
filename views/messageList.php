@@ -1,22 +1,19 @@
 <?php
 include("header.php");
+require_once '../controller/message_controller.php';
 ?>
 
+<?php foreach ($messages
 
-
-<?php foreach ($topics
-
-               as $topic): ?>
+               as $message): ?>
 
     <div class="row justify-content-center mb-1">
         <div class="col">
-            <?php echo $topic['name'] ?></td>
+            <?php echo $message['message'] ?></td>
         </div>
+
         <div class="col">
-            <a href="/AA2/views/postList.php?topicId=<?php echo $topic['topicId'] ?>" class="btn btn-info" type="button">See
-                posts</a></div>
-        <div class="col">
-            <a href="/views/topicListIndex.php"
+            <a href="../views/topicListIndex.php"
                 <?php if (isset($_SESSION['admin'])) {
                     if ($_SESSION['username'] == 'admin') { ?>
                         class="btn btn-warning"
@@ -34,7 +31,6 @@ include("header.php");
 <?php endforeach; ?>
 
 <a href="/model/destroySession.php">Cerrar sesión</a>
-</div>
 
 </body>
 </html>

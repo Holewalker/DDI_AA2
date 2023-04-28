@@ -108,4 +108,19 @@ public int $previousMessageId;
         $this->previousMessageId = $previousMessageId;
     }
 
+    public static function getMessagesByPostId($postId)
+    {
+        try {
+
+            $db = DBConexion::connection();
+            $sql = "SELECT * FROM messages WHERE postId=? ORDER BY previousMessageId asc ";
+            $respuesta = $db->prepare($sql);
+            $respuesta->execute(array($postId));
+            $respuesta = $respuesta->fetchAll(PDO::FETCH_ASSOC);
+            return $respuesta;
+        } catch (PDOException $e) {
+            echo "ERROR: " . $e->getMessage();
+        }
+    }
+
 }

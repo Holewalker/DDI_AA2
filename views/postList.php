@@ -12,8 +12,8 @@ require_once '../controller/post_controller.php';
             <?php echo $post['title'] ?></td>
         </div>
         <div class="col">
-            <a href="/views/postList.php?topicId=<?php echo $post['topicId'] ?>" class="btn btn-info" type="button">See
-                posts</a>
+            <a href="messageList.php?id=<?php echo $post['postId'] ?>" class="btn btn-info" type="button">See
+                messages</a>
         </div>
         <div class="col">
             <a href="/views/topicListIndex.php"

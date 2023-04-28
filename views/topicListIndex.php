@@ -2,18 +2,8 @@
 include("header.php");
 ?>
 
-<body>
 
-<nav class="navbar navbar-light bg-light">
-    <div class="container justify-content-center">
-        <a href="/AA2/index.php" class="btn btn-info m-1" type="button">Topics</a>
-        <a href="/AA2/views/topicListIndex.php" class="btn btn-info m-1" type="button">Login</a>
-        <a href="/AA2/views/topicListIndex.php" class="btn btn-info m-1" type="button">Register</a>
-    </div>
-    <a href="./views/topicListIndex.php" class="btn btn-info m-1" type="button">New topic!</a>
-    <a href="./views/loginForm.php" class="btn btn-info m-1" type="button">Login</a>
-</nav>
-<div class="container-sm text-center justify-content-center w-25 mt-5">
+
     <?php foreach ($topics
 
                    as $topic): ?>

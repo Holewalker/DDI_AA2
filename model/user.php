@@ -77,14 +77,14 @@ class user
         }
     }
 
-    public function createUser()
+    public function createUser($username, $email, $password)
     {
         try {
-            $saltedPass = self::crypMd5($_POST['pass']);
+            $saltedPass = self::crypMd5($password);
             $query = "INSERT INTO users (username, email, pass) VALUES (:username,:email, :pass)";
             $stmt = $this->db->prepare($query);
-            $stmt->bindParam(':username', $_POST['username']);
-            $stmt->bindParam(':email', $_POST['email']);
+            $stmt->bindParam(':username', $username);
+            $stmt->bindParam(':email', $email);
             $stmt->bindParam(':pass', $saltedPass);
             $stmt->execute();
             return $this->db->lastInsertId();

@@ -15,20 +15,16 @@ class User_Controller
     }
 
 
-    public function createUser()
+    public function createUser($username, $email, $pass)
     {
-        include("view/header.php");
-        require_once 'view/newUser.php';
         if ($_SERVER["REQUEST_METHOD"] == "POST") {
-            $this->modelUser->createUser();
-            header("Location: /AA2/index.php");
+            $this->modelUser->createUser($username, $email, $pass);
+            //header("Location: /AA2/index.php");
         }
     }
 
     public function checkUser($username, $pass)
     {
-
-        include("../views/header.php");
 
         $this->session->set("username", $this->modelUser->checkCredentials($username, $pass));
 
@@ -56,3 +52,4 @@ if (isset($_GET["endSession"])) {
 
 
 require_once("userForms/user_login.php");
+require_once("userForms/user_register.php");

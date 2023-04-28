@@ -1,6 +1,5 @@
 <?php
-require_once("../ddbb/DBConexion.php");
-
+require_once('../ddbb/DBConexion.php');
 class user
 {
     public $userId;
@@ -52,42 +51,44 @@ class user
         $this->email = $email;
     }
 
-    public static function crypMd5($password)
+    public static function crypt($password)
     {
-        $password = md5($password);
+        $password = sha1($password);
         return $password;
     }
 
     /*
     * @param String $pass;
      */
-    public function checkCredentials($username, $pass)
+    public static function checkCredentials($username, $pass)
     {
-        $pass = self::crypMd5($pass);
+        $passC = self::crypt($pass);
         $db = DBConexion::connection();
         //$sql = $db->query("SELECT * FROM users where username = '.$username' and pass = '.$pass'");
         //$respuesta = $db->prepare($sql);
-        $respuesta = $db->prepare("SELECT * FROM users where username = '.$username' and pass = '.$pass'");
-        $respuesta = $respuesta->fetch();
+
+        $sql = "SELECT userId, username, email FROM users WHERE username=:usuario AND pass=:password";
+        $respuesta = $db->prepare($sql);
+        $respuesta->execute(array(':usuario' => $username, ':password' => $passC));
+        $respuesta = $respuesta->fetch(PDO::FETCH_ASSOC);
+
         if ($respuesta) {
-            $usuario = new user($respuesta["userId"], $respuesta["username"], $respuesta["email"]);
-            return $usuario->getUsername();
-        } else {
-            return null;
+            return new user($respuesta["userId"], $respuesta["username"], $respuesta["email"]);
         }
     }
 
-    public function createUser($username, $email, $password)
+    public static function createUser($username, $email, $password)
     {
         try {
-            $saltedPass = self::crypMd5($password);
+            $saltedPass = self::crypt($password);
+            $db = DBConexion::connection();
             $query = "INSERT INTO users (username, email, pass) VALUES (:username,:email, :pass)";
-            $stmt = $this->db->prepare($query);
+            $stmt = $db->prepare($query);
             $stmt->bindParam(':username', $username);
             $stmt->bindParam(':email', $email);
             $stmt->bindParam(':pass', $saltedPass);
             $stmt->execute();
-            return $this->db->lastInsertId();
+            return $stmt;
         } catch (PDOException $e) {
             echo "ERROR: " . $e->getMessage();
         }

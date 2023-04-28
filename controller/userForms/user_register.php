@@ -32,9 +32,9 @@ if (!empty($_POST["register"])) {
     }
 
     $usuario = $controlador->createUser($_POST["username"], $_POST["email"], $_POST["password"]);
+
 } else {
     $_SESSION["formdatalogin"] = $_POST; //almacena los datos enviador por formulario
-    //$_SESSION["mensajelogin"] = $mensaje; // almacena el mensaje de error
 }
 
 // end if validacion login

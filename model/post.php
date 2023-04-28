@@ -1,8 +1,7 @@
 <?php
-require_once("ddbb/conexionheader.php");
-require_once("topic.php");
-require_once("user.php");
-
+require_once('../ddbb/DBConexion.php');
+require_once('topic.php');
+require_once('user.php');
 class post
 {
     public int $postId;

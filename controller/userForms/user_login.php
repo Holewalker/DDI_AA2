@@ -5,7 +5,7 @@ if (!empty($_POST["login"])) {
         $value = trim($value);
         //si algun campo está vacío...
         // si el alias tiene menos de tres caracteres...
-        if ($key == "username" && strlen($value) < $num = 3) {
+       /* if ($key == "username" && strlen($value) < $num = 3) {
             $mensaje = '<p class="error-form">El campo <b>' . $key . '</b> debe ser mayor que ' . $num . '</p>';
             $validacion = false;
 
@@ -15,13 +15,16 @@ if (!empty($_POST["login"])) {
             $mensaje = '<p class="error-form">El campo <b>' . $key . '</b> debe ser mayor que ' . $num . '</p>';
             $validacion = false;
             break;
-        }
+        }*/
     }
 
     $usuario = $controlador->checkUser($_POST["username"], $_POST["password"]);
+    $_SESSION["username"] = $usuario->username;
+    header('Location: /AA2/index.php');
 } else {
     $_SESSION["formdatalogin"] = $_POST; //almacena los datos enviador por formulario
-    //$_SESSION["mensajelogin"] = $mensaje; // almacena el mensaje de error
+
+
 }
 
 // end if validacion login

@@ -15,7 +15,7 @@ if(isset($_GET["register"])){
     <input type="text" name="username" id="username" required <?php echo (isset($alias) ? 'value="'.$alias.'"' : ''); echo (($campo == 'username' || $campo == null) ? 'autofocus':''); ?>><br>
     <label for="password">Password:</label>
     <input type="password" name="password" id="password" required><br>
-    <input type="submit" name="login" value="Iniciar sesión">
+    <input type="submit" name="login" value="login">
 </form>
 
 <p>¿Aún no estás registrado? <a class="log-reg" href="<?php echo "?register" ?>">Registrarse</a></p>

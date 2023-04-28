@@ -1,5 +1,5 @@
 <?php
-require_once 'model/topic.php';
+require_once('./model/topic.php');
 
 class TopicController
 {

@@ -1,5 +1,5 @@
 <?php
-require_once("ddbb/conexionheader.php");
+require_once('../ddbb/DBConexion.php');
 
 class message
 {

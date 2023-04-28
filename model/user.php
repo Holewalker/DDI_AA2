@@ -1,5 +1,6 @@
 <?php
 require_once('../ddbb/DBConexion.php');
+
 class user
 {
     public $userId;
@@ -95,5 +96,19 @@ class user
         return false;
     }
 
+    public static function getUserByID($userId)
+    {
+        try {
+
+            $db = DBConexion::connection();
+            $sql = "SELECT * FROM users WHERE userId=?";
+            $respuesta = $db->prepare($sql);
+            $respuesta->execute(array($userId));
+            $respuesta = $respuesta->fetch(PDO::FETCH_ASSOC);
+            return $respuesta;
+        } catch (PDOException $e) {
+            echo "ERROR: " . $e;
+        }
+    }
 
 }

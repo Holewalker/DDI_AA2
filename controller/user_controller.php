@@ -32,6 +32,10 @@ class User_Controller
         header("Location: /AA2/index.php");
     }
 
+    public function getUserById($userId)
+    {
+        return user::getUserByID($userId);
+    }
 
 }
 

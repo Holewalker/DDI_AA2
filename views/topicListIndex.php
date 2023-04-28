@@ -2,8 +2,9 @@
 include("header.php");
 ?>
 
-
-
+<div class="row pb-2">
+    <h1>Topics:</h1>
+</div>
 <?php foreach ($topics
 
                as $topic): ?>

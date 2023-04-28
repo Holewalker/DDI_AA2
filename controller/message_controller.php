@@ -1,5 +1,6 @@
 <?php
 require_once('../model/message.php');
+require_once('../controller/user_controller.php');
 
 class MessageController
 {
@@ -60,9 +61,12 @@ class MessageController
 }
 
 $controller = new MessageController();
+$userController = new User_controller();
 
 if (isset($_GET['id'])) {
     $messages = $controller->listAllMessagesByPostId($_GET['id']);
 }
+
+
 
 

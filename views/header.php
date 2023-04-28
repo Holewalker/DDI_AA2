@@ -16,10 +16,10 @@ session_start();
 <body>
 
 <nav class="navbar navbar-light bg-light">
-    <div class="container justify-content-center">
+    <div class="container justify-content-start">
         <a href="/AA2/index.php" class="btn btn-info m-1" type="button">Main page</a>
     </div>
-    <a href="./views/topicListIndex.php" class="btn btn-info m-1" type="button">New topic! (WIP)</a>
+    <a href="/AA2/views/topicListIndex.php" class="btn btn-info m-1" type="button">New topic! (WIP)</a>
     <?php
     //var_dump($_SESSION);
     if (isset($_SESSION['username'])) {
@@ -35,7 +35,7 @@ session_start();
 
     } else {
     ?>
-    <a href="./views/loginForm.php" class="btn btn-info m-1" type="button">Login
+    <a href="/AA2/views/loginForm.php" class="btn btn-info m-1" type="button">Login
         <?php
 
         } ?>
